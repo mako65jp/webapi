@@ -1,9 +1,11 @@
+import "reflect-metadata";
+import { createConnection } from "typeorm";
+import * as bodyParser from "body-parser";
+
 import http from "http";
 import express from 'express';
-import "reflect-metadata";
 import { applyMiddleware, applyRoutes } from "./utils";
 import middleware from "./middleware";
-import errorHandlers from "./middleware/errorHandlers";
 import routes from "./services";
 
 process.on("uncaughtException", e => {
@@ -16,15 +18,22 @@ process.on("unhandledRejection", e => {
     process.exit(1);
 });
 
-const router = express();
-applyMiddleware(middleware, router);
-applyRoutes(routes, router);
-applyMiddleware(errorHandlers, router);
+createConnection().then(async connection => {
 
-const { PORT = 3000 } = process.env;
-const HOST = '0.0.0.0';
-const server = http.createServer(router);
+    const router = express();
 
-server.listen(PORT, () =>
-    console.log(`Server is running http://${HOST}:${PORT}...`)
-);
+    router.use(bodyParser.json());
+
+    applyMiddleware(middleware, router);
+    applyRoutes(routes, router);
+    // applyMiddleware(errorHandlers, router);
+
+    const { PORT = 3000 } = process.env;
+    const HOST = '0.0.0.0';
+    const server = http.createServer(router);
+
+    server.listen(PORT, () =>
+        console.log(`Server is running http://${HOST}:${PORT}...`)
+    );
+
+}).catch(error => console.log(error));

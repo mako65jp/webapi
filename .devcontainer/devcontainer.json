@@ -1,0 +1,33 @@
+{
+  "name": "Node.js Template",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "node",
+  "workspaceFolder": "/var/app",
+  // Specifies a list of ports that should be published.
+  "appPort": [
+    3000
+  ],
+  // Comment out the next line to run as root instead. Linux users, update
+  // Dockerfile with your user's UID/GID if not 1000.
+  // "runArgs": ["-u", "node"],
+  // Use 'settings' to set *default* container specific settings.json values on container create.
+  // You can edit these settings after create using File > Preferences > Settings > Remote.
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  // "shutdownAction": "none",
+  // // Specifies a command that should be run after the container has been created.
+  // "postCreateCommand": "yarn install",
+  "extensions": [
+    // code --list-extensions | xargs -L 1 echo code --install-extension
+    // "esbenp.prettier-vscode",
+    "MS-CEINTL.vscode-language-pack-ja",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "waderyan.nodejs-extension-pack",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "coenraads.bracket-pair-colorizer",
+    "mako65jp.translation"
+  ]
+}

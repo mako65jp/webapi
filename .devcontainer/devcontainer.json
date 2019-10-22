@@ -28,6 +28,7 @@
     "waderyan.nodejs-extension-pack",
     "ms-vscode.vscode-typescript-tslint-plugin",
     "coenraads.bracket-pair-colorizer",
+    // "ms-azuretools.vscode-docker",
     "mako65jp.translation"
   ]
 }

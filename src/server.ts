@@ -4,8 +4,8 @@ import * as bodyParser from "body-parser";
 
 import http from "http";
 import express from 'express';
-import { applyMiddleware, applyRoutes } from "./utils";
-import middleware from "./middleware";
+import { applyErrorHandlers, applyRoutes } from "./utils";
+import errorHandlers from "./errorHandlers";
 import routes from "./services";
 
 process.on("uncaughtException", e => {
@@ -23,10 +23,9 @@ createConnection().then(async connection => {
     const router = express();
 
     router.use(bodyParser.json());
+    applyErrorHandlers(errorHandlers, router);
 
-    applyMiddleware(middleware, router);
     applyRoutes(routes, router);
-    // applyMiddleware(errorHandlers, router);
 
     const { PORT = 3000 } = process.env;
     const HOST = '0.0.0.0';

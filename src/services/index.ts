@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
+import { Route } from "../utils";
+
 import searchRoutes from "./search/routes";
 import { Routes } from "./database/routes";
 
-const databaseRoutes: any[] = Routes.map((route: { route: any; method: any; controller: any; action: string; }) => {
+const databaseRoutes: Route[] = Routes.map((route: { route: any; method: any; controller: any; action: string; }) => {
     return {
         path: route.route,
         method: route.method,

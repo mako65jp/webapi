@@ -1,23 +1,23 @@
 import { Router, Request, Response, NextFunction } from "express";
 
-type Wrapper = ((router: Router) => void);
+export type Wrapper = ((router: Router) => void);
 
-export const applyMiddleware = (
-    middlewareWrappers: Wrapper[],
+export const applyErrorHandlers = (
+    errorHandlerWrappers: Wrapper[],
     router: Router
 ) => {
-    for (const wrapper of middlewareWrappers) {
+    for (const wrapper of errorHandlerWrappers) {
         wrapper(router);
     }
 };
 
-type Handler = (
+export type Handler = (
     req: Request,
     res: Response,
     next: NextFunction
 ) => Promise<void> | void;
 
-type Route = {
+export type Route = {
     path: string;
     method: string;
     handler: Handler | Handler[];
